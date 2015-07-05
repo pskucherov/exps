@@ -100,7 +100,7 @@
 <div class="footer"></div>
 
 
-<script src="//yastatic.net/jquery/1.8.3/jquery.min.js"></script>
+<script src="//yastatic.net/jquery/1.8.3/jquery.min.js" async defer></script>
 <script>
     /*
      Отрисовка страницы не произойдёт, пока не загрузится весь js.
@@ -117,7 +117,7 @@
 
     /*
     Чёт не срабатывает и загрузка начинается уже после загрузки js.
-    @TODO поисследовать
+    причина: https://learn.javascript.ru/external-script
     var link=document.createElement('link');
     link.href='index.css';
     link.rel='stylesheet';
@@ -136,10 +136,11 @@
     };
     var raf = requestAnimationFrame || mozRequestAnimationFrame ||
             webkitRequestAnimationFrame || msRequestAnimationFrame;
+
     if (raf) raf(cb);
     else window.addEventListener('load', cb);
 
 </script>
-<script src="index.js"></script>
+<script src="index.js" async defer></script>
 </body>
 </html>
