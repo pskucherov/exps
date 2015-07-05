@@ -102,7 +102,6 @@
 
 <script src="//yastatic.net/jquery/1.8.3/jquery.min.js"></script>
 <script>
-
     /*
      Отрисовка страницы не произойдёт, пока не загрузится весь js.
      <link rel="stylesheet" href="index.css"/>
@@ -116,11 +115,29 @@
     });
     */
 
+    /*
+    Чёт не срабатывает и загрузка начинается уже после загрузки js.
+    @TODO поисследовать
     var link=document.createElement('link');
     link.href='index.css';
     link.rel='stylesheet';
 
     document.getElementsByTagName('head')[0].appendChild(link);
+    */
+
+
+    /*
+     http://stackoverflow.com/questions/28394097/async-loading-css-stylesheet-using-requestanimationframe
+     */
+    var cb = function() {
+        var l = document.createElement('link'); l.rel = 'stylesheet';
+        l.href = 'index.css';
+        var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(cb);
+    else window.addEventListener('load', cb);
 
 </script>
 <script src="index.js"></script>
