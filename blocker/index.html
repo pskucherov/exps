@@ -98,11 +98,30 @@
     qwqwewq ewq e qwqwewq ewq e qwqwewq ewq e qwqwewq ewq e qwqwewq ewq e qwqwewq ewq e qwqwewq ewq e qw
 </div>
 <div class="footer"></div>
+
+
 <script src="//yastatic.net/jquery/1.8.3/jquery.min.js"></script>
 <script>
+
+    /*
+     Отрисовка страницы не произойдёт, пока не загрузится весь js.
+     <link rel="stylesheet" href="index.css"/>
+    */
+
+
+    /*
+    Ждёт полной загрузки страницы, включая js.
     $(document).ready(function() {
         $("head").append("<link rel='stylesheet' type='text/css' href='index.css' />");
     });
+    */
+
+    var link=document.createElement('link');
+    link.href='index.css';
+    link.rel='stylesheet';
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+
 </script>
 <script src="index.js"></script>
 </body>
